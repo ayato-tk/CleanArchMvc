@@ -2,13 +2,16 @@ using CleanArchMvc.Domain.Validation;
 
 namespace CleanArchMvc.Domain.Entities
 {
-    public sealed class Category
+    public sealed class Category : Entity
     {
-        public int Id { get; private set; }
-
         public string Name { get; private set; }
 
         public Category(string name)
+        {
+            ValidateDomain(name);
+        }
+
+        public void Update(string name)
         {
             ValidateDomain(name);
         }
@@ -25,7 +28,7 @@ namespace CleanArchMvc.Domain.Entities
 
         private void ValidateDomain(string name)
         {
-            DomainExceptionValidation.when(string.IsNullOrEmpty(name), "Invalid name.Name is required");
+            DomainExceptionValidation.when(string.IsNullOrEmpty(name), "Invalid name. Name is required");
 
             DomainExceptionValidation.when(name.Length < 3, "Invalid name, too short, minimum 3 characters");
 
