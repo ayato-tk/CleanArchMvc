@@ -27,7 +27,7 @@ namespace CleanArchMvc.Domain.Entities
             ValidateDomain(name, description, price, stock, image);
         }
 
-         public Update(string name, string description, decimal price, int stock, string image, int categoryId)
+         public void Update(string name, string description, decimal price, int stock, string image, int categoryId)
         {
             ValidateDomain(name, description, price, stock, image);
             CategoryId = categoryId;
@@ -35,11 +35,25 @@ namespace CleanArchMvc.Domain.Entities
 
         private void ValidateDomain(string name, string description, decimal price, int stock, string image)
         {
-            DomainExceptionValidation.when(string.IsNullOrEmpty(name), "Invalid name. Name is required");
+            DomainExceptionValidation.When(string.IsNullOrEmpty(name), "Invalid name. Name is required");
 
-            DomainExceptionValidation.when(name.Length < 3, "Invalid name, too short, minimum 3 characters");
+            DomainExceptionValidation.When(name.Length < 3, "Invalid name, too short, minimum 3 characters");
 
-            DomainExceptionValidation.when(string.IsNullOrEmpty(description), "Invalid description. Description is required");
+            DomainExceptionValidation.When(string.IsNullOrEmpty(description), "Invalid description. Description is required");
+
+            DomainExceptionValidation.When(description.Length < 5, "Invalid description, too short, minimum 5 characters");
+
+            DomainExceptionValidation.When(price < 0, "Invalid price value");
+
+            DomainExceptionValidation.When(stock < 0, "Invalid stock value");
+
+            DomainExceptionValidation.When(image.Length > 250, "Invalid image name, too long, maximum 250 characters");
+
+            Name = name;
+            Description = description;
+            Price = price;
+            Stock = stock;
+            Image = image;
         }
 
         public int CategoryId { get; set; }
