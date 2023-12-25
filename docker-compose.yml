@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: meu_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: SDFGDSGDBFDBF#!#!$!
+      MYSQL_DATABASE: localhost
+      MYSQL_USER: localhost
+      MYSQL_PASSWORD: localhost
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
