@@ -18,7 +18,7 @@ namespace CleanArchMvc.Infra.IoC
                 ServerVersion.AutoDetect(configuration.GetConnectionString("DefaultConnection")),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
             );
-
+            
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
